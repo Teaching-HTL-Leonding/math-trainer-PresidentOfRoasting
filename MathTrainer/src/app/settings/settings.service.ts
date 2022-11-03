@@ -70,6 +70,7 @@ export class SettingsService {
 
   public calculateQuestions(){
     let allowedOperators:string[]=[];
+    this.questions=[];
     for (let i = 0; i < 4; i++) {
       if(this.operators[i]){
         allowedOperators[i]=this.operatorsString[i];
