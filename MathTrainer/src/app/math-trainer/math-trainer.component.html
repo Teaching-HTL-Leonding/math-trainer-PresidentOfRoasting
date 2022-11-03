@@ -1,7 +1,13 @@
 <h1>Math Test</h1>
 <button routerLink="/settings">Back</button>
-<div *ngFor="let item of settings.questions">
+<div *ngFor="let item of settings.questions let i = index">
   <p>
-    {{item}}
+    {{item}}=
+    <input type="number" id="userInput" name="userInput" [(ngModel)]="userInput[i]">
+    <a style="color:red" *ngIf="!results[i]" [hidden]="buttonPressed">{{settings.answers[i]}}</a>
+    <a style="color:green" *ngIf="results[i]" [hidden]="buttonPressed">{{settings.answers[i]}}</a>
   </p>
+
 </div>
+
+<button (click)="checkValues()">Submit</button>

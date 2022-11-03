@@ -9,17 +9,18 @@ export class SettingsService {
   public numberOfQuestions:number=15;
   public operators:boolean[]=[true,true,true,true];
   public operatorsString:string[]=['+','-','*','/'];
-  public questions?:string[];
-  public answers?:string[];
+  public questions?:string[]=[];
+  public answers:string[]=[];
   constructor() { }
 
   public calculateSubstractionQuestion(operator:string){
     let firstNumber=0;
     let secondNumber=1;
+    let randomMax:number[]=[9,99,999,9999]
     do {
-      firstNumber=Math.random()*9999;
-      secondNumber=Math.random()*9999;
-    } while (secondNumber<firstNumber&&firstNumber.toString.length<=this.numberOfDigits&&secondNumber.toString.length<=this.numberOfDigits);
+      firstNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+      secondNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+    } while (secondNumber>firstNumber);
     let answer = firstNumber-secondNumber;
     this.answers?.push(answer.toString());
     this.questions?.push(firstNumber.toString()+operator+secondNumber.toString())
@@ -29,11 +30,12 @@ export class SettingsService {
     let firstNumber=0;
     let secondNumber=1;
     let test=0;
+    let randomMax:number[]=[9,99,999,9999]
     do {
-      firstNumber=Math.random()*9999;
-      secondNumber=Math.random()*9999;
+      firstNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+      secondNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
       test=(firstNumber/secondNumber)*10
-    } while (test%10===0&&secondNumber<firstNumber&&firstNumber.toString.length<=this.numberOfDigits&&secondNumber.toString.length<=this.numberOfDigits);
+    } while (test%10!==0&&secondNumber>firstNumber);
     let answer = firstNumber/secondNumber;
     this.answers?.push(answer.toString());
     this.questions?.push(firstNumber.toString()+operator+secondNumber.toString())
@@ -42,10 +44,11 @@ export class SettingsService {
   public calculateAdditionQuestion(operator:string){
     let firstNumber=0;
     let secondNumber=1;
-    do {
-      firstNumber=Math.random()*9999;
-      secondNumber=Math.random()*9999;
-    } while (firstNumber.toString().length<=this.numberOfDigits&&secondNumber.toString().length<=this.numberOfDigits);
+    let randomMax:number[]=[9,99,999,9999]
+
+    firstNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+    secondNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+
     let answer = firstNumber+secondNumber;
     this.answers?.push(answer.toString());
     this.questions?.push(firstNumber.toString()+operator+secondNumber.toString())
@@ -55,22 +58,25 @@ export class SettingsService {
   public calculateMultiplicationQuestion(operator:string){
     let firstNumber=0;
     let secondNumber=1;
-    do {
-      firstNumber=Math.random()*9999;
-      secondNumber=Math.random()*9999;
-    } while (firstNumber.toString().length<=this.numberOfDigits&&secondNumber.toString().length<=this.numberOfDigits);
+    let randomMax:number[]=[9,99,999,9999]
+
+    firstNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+    secondNumber=Math.floor(Math.random()*randomMax[this.numberOfDigits-1]);
+
     let answer = firstNumber*secondNumber;
     this.answers?.push(answer.toString());
     this.questions?.push(firstNumber.toString()+operator+secondNumber.toString())
   }
 
   public calculateQuestions(){
-    let allowedOperators=[];
+    let allowedOperators:string[]=[];
     for (let i = 0; i < 4; i++) {
       if(this.operators[i]){
         allowedOperators[i]=this.operatorsString[i];
       }
-      let operator = allowedOperators[Math.random()*4];
+    }
+    for (let i = 0; i < this.numberOfQuestions; i++) {
+      let operator:string = allowedOperators[Math.floor(Math.random()*4)];
       switch (operator) {
         case '+':
           this.calculateAdditionQuestion(operator);
@@ -90,7 +96,7 @@ export class SettingsService {
         default:
           break;
       }
-      console.log(this.questions)
+      console.log(Math.floor(Math.random()*4))
     }
   }
 
