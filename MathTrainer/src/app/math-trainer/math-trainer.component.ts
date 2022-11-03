@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../settings/settings.service';
 
 @Component({
   selector: 'app-math-trainer',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MathTrainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public test:SettingsService) { }
 
   ngOnInit(): void {
   }
