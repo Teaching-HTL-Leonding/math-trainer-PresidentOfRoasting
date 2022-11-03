@@ -1,7 +1,8 @@
 <h1>Settings</h1>
 <div>
-  <label>Number of Digits
-    <input type="number" id="numberOfDigits" name="numberOfDigits">
+  <p>Number of Digits</p>
+  <label>
+    <input type="number" id="numberOfDigits" name="numberOfDigits" [(ngModel)]="settings.numberOfDigits">
   </label>
 </div>
 
@@ -10,7 +11,7 @@
     How many questions? (15-20 possible Questions)
   </p>
   <label>
-    <input type="number" id="numberOfQuestions" name="numberOfQuestions">
+    <input type="number" id="numberOfQuestions" name="numberOfQuestions" [(ngModel)]="settings.numberOfQuestions">
   </label>
 </div>
 
@@ -19,17 +20,17 @@
     Select operators
   </p>
   <label>
-    <input type="checkbox" id="add" name="add">+
+    <input type="checkbox" id="add" name="add" [(ngModel)]="settings.operators[0]">+
   </label>
   <label>
-    <input type="checkbox" id="sub" name="sub">-
+    <input type="checkbox" id="sub" name="sub"  [(ngModel)]="settings.operators[1]">-
   </label>
   <label>
-    <input type="checkbox" id="muliplicate" name="muliplicate">*
+    <input type="checkbox" id="muliplicate" name="muliplicate"  [(ngModel)]="settings.operators[2]">*
   </label>
   <label>
-    <input type="checkbox" id="divide" name="divide">/
+    <input type="checkbox" id="divide" name="divide"  [(ngModel)]="settings.operators[3]">/
   </label>
 </div>
 
-<button routerLink="math-trainer">Submit</button>
+<button routerLink="/math-trainer" (click)="settings.calculateQuestions()" [disabled]="!settings.checkValues()">Submit</button>

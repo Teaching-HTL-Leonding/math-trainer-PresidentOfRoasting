@@ -8,7 +8,8 @@ import { SettingsService } from '../settings/settings.service';
 })
 export class MathTrainerComponent implements OnInit {
 
-  constructor(public test:SettingsService) { }
+  constructor(public settings:SettingsService) {
+   }
 
   ngOnInit(): void {
   }

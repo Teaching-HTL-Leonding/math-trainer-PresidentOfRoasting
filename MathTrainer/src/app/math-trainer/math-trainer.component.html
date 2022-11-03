@@ -1,1 +1,7 @@
 <h1>Math Test</h1>
+<button routerLink="/settings">Back</button>
+<div *ngFor="let item of settings.questions">
+  <p>
+    {{item}}
+  </p>
+</div>
